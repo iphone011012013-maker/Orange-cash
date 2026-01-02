@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Orange Cash — محفظتك الإلكترونية | Mahmoud_AboElfadl</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Meta Tags for SEO & Social Sharing -->
+    <meta property="og:site_name" content="Orange Cash - Mahmoud AboElfadl" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ar_EG" />
+    <meta property="og:title" content="Orange Cash — إدارة أموالك بسهولة 🧡">
+    <meta property="og:description" content="إدارة محفظة Orange Cash: تحويل، سحب، إيداع، وخدمات فورية. واجهة متطورة من تصميم Mahmoud AboElfadl.">
+    <meta name="theme-color" content="#ff7900" />
+    <meta name="author" content="Mahmoud_AboElfadl">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Orange Brand Colors */
+            --primary-color: #ff7900; /* Orange */
+            --primary-dark: #000000;  /* Black for contrast */
+            --primary-gradient: linear-gradient(135deg, #ff9e3d, #ff7900);
+            --accent-color: #ffffff;
+            --bg-color: #f6f6f6;
+            --text-color: #000000;
+            --card-bg: #ffffff;
+            --secondary-text: #555;
+            
+            /* Fawry Colors */
+            --fawry-yellow: #ffc107;
+            --fawry-blue: #005eb8;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--primary-dark); /* Black background for header contrast */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 60px;
+            overflow-x: hidden;
+            /* Subtle dark pattern */
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 121, 0, 0.05) 0%, transparent 20%);
+        }
+
+        /* Top Status Bar */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9); /* Solid Black */
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            z-index: 2000;
+            box-shadow: 0 2px 10px rgba(255, 121, 0, 0.1);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .status-info {
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .status-info span { margin: 0 6px; font-variant-numeric: tabular-nums; }
+        .status-info .time { font-weight: 800; font-size: 1.2em; letter-spacing: 0.5px; color: var(--primary-color); }
+
+        /* Profile Icon */
+        .profile-btn {
+            background-color: rgba(255, 121, 0, 0.15);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 121, 0, 0.3);
+        }
+        .profile-btn:hover { background-color: var(--primary-color); transform: translateY(-2px); border-color: var(--primary-color); }
+        .profile-btn:hover i { color: black; }
+        .profile-btn i { color: var(--primary-color); font-size: 1.2em; transition: color 0.2s; }
+
+        /* Main Container */
+        .container {
+            background-color: var(--bg-color);
+            border-radius: 30px 30px 0 0;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 500px;
+            min-height: calc(100vh - 60px);
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            animation: slideUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            padding-bottom: 80px;
+            position: relative;
+        }
+        @media (min-width: 481px) {
+            .container {
+                width: 95%;
+                border-radius: 30px;
+                min-height: auto;
+                margin-bottom: 40px;
+                margin-top: 20px;
+            }
+        }
+
+        /* Branding Header */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black;
+            animation: fadeIn 0.8s ease;
+        }
+        .brand-header h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+        .brand-header h1 span { color: var(--primary-color); font-size: 1em; font-weight: 900; } /* Make 'Orange' colored */
+        .brand-header .slogan {
+            font-size: 0.9em;
+            color: var(--secondary-text);
+            font-weight: 600;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Grid Layout */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        /* Menu Items */
+        .menu-item {
+            background-color: white;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 20px;
+            padding: 20px 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            color: var(--text-color);
+            text-decoration: none;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+        .menu-item:active { transform: scale(0.96); }
+        .menu-item:hover { 
+            border-color: var(--primary-color); 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 25px rgba(255, 121, 0, 0.15);
+        }
+
+        /* Shine Effect */
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 121, 0, 0.1), transparent);
+            transition: 0.5s;
+        }
+        .menu-item:hover::before { left: 100%; }
+
+        /* Icon Wrapper */
+        .menu-item .icon-wrapper {
+            width: 55px;
+            height: 55px;
+            background: #fff0e0; /* Very light orange */
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            transition: transform 0.3s, background 0.3s;
+            color: var(--primary-color);
+            font-size: 1.6em;
+        }
+
+        .menu-item:hover .icon-wrapper { 
+            background: var(--primary-gradient); 
+            color: white;
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 5px 15px rgba(255, 121, 0, 0.3);
+        }
+
+        /* Text Styling */
+        .menu-item .title {
+            font-weight: 800;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .menu-item .subtitle {
+            font-size: 0.75em;
+            color: #888;
+            font-weight: 600;
+            line-height: 1.4;
+            max-width: 95%;
+        }
+
+        /* Full Width Items */
+        .full-width { 
+            grid-column: 1 / -1; 
+            flex-direction: row; 
+            justify-content: flex-start; 
+            text-align: right; 
+            min-height: 100px; 
+            padding-right: 25px; 
+            background: black;
+            color: white;
+            border: none;
+        }
+        .full-width .icon-wrapper { 
+            margin-bottom: 0; 
+            margin-left: 20px; 
+            background: rgba(255,255,255,0.15); 
+            color: var(--primary-color);
+        }
+        .full-width:hover {
+            transform: translateY(-3px);
+            background: #1a1a1a;
+            border-color: transparent;
+        }
+        .full-width:hover .icon-wrapper {
+            background: var(--primary-color);
+            color: black;
+        }
+        .full-width .subtitle { color: #aaa; }
+        .full-width .text-content { display: flex; flex-direction: column; align-items: flex-start; }
+
+        /* Password Management Specific Style */
+        .password-mgmt {
+            background: white;
+            color: black;
+            border: 2px solid #eee;
+        }
+        .password-mgmt:hover { background: white; border-color: var(--primary-color); }
+        .password-mgmt .icon-wrapper { background: #f0f0f0; color: #555; }
+        .password-mgmt:hover .icon-wrapper { background: black; color: white; }
+
+        /* Fawry Special Item */
+        .fawry-special {
+            background: linear-gradient(135deg, #fff, #fffbf0);
+            border-color: #ffe082;
+            color: black;
+        }
+        .fawry-special .icon-wrapper { color: var(--fawry-blue); background: rgba(255, 193, 7, 0.2); }
+        .fawry-special:hover .icon-wrapper { background: var(--fawry-yellow); color: var(--fawry-blue); }
+        .fawry-special:hover { background: #fff; transform: translateY(-3px); }
+        .fawry-special .subtitle { color: #666; }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            align-items: flex-end;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        @media (min-width: 481px) { .modal { align-items: center; } }
+
+        .modal-content {
+            background-color: white;
+            width: 100%;
+            max-width: 450px;
+            padding: 25px;
+            border-radius: 25px 25px 0 0;
+            text-align: right;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+            animation: slideUpModal 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        @media (min-width: 481px) { .modal-content { border-radius: 25px; animation: popIn 0.3s; } }
+
+        /* Fawry Modal Branding & Table */
+        .fawry-header {
+            background: var(--fawry-blue);
+            color: white;
+            margin: -25px -25px 20px -25px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 25px 25px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-bottom: 4px solid var(--fawry-yellow);
+        }
+        .fawry-header h3 { margin: 0; font-size: 1.3em; font-weight: 800; }
+        .fawry-logo-circle {
+            width: 40px;
+            height: 40px;
+            background: var(--fawry-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--fawry-blue);
+            font-size: 1.2em;
+        }
+
+        .codes-table-container {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .codes-table { width: 100%; border-collapse: collapse; font-size: 0.95em; }
+        .codes-table th { background: #f1f1f1; color: #444; padding: 12px 8px; border-bottom: 2px solid #ddd; }
+        .codes-table td { padding: 12px 8px; text-align: center; border-bottom: 1px solid #f0f0f0; font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+        
+        /* Highlight Orange Row */
+        .row-highlight { background-color: rgba(255, 121, 0, 0.1); }
+        .row-highlight td:first-child { color: var(--primary-color); font-weight: 900; }
+
+        .btn-close {
+            background: black; color: white; border: none; width: 100%; padding: 15px;
+            border-radius: 15px; font-weight: 700; cursor: pointer; font-size: 1em;
+            transition: background 0.2s;
+        }
+        .btn-close:hover { background: #333; }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        @keyframes slideUp { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slideUpModal { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="status-info">
+            <span id="battery-status">%--</span>
+            <span id="current-time" class="time">--:--</span>
+        </div>
+        
+        <!-- Link to Orange Account Login if available, or just a placeholder profile link -->
+        <a href="https://www.orange.eg/ar/myaccount/login" class="profile-btn" title="الملف الشخصي">
+            <i class="fas fa-user"></i>
+        </a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <div class="brand-header">
+            <h1><span>Orange</span> Cash</h1>
+            <span class="slogan">أسهل وأسرع محفظة في مصر</span>
+        </div>
+
+        <div class="menu-grid">
+            
+            <!-- 1. Balance Inquiry -->
+            <a href="tel:*7115*81%23" class="menu-item">
+                <div class="icon-wrapper">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <span class="title">استعلام رصيد</span>
+                <span class="subtitle">اعرف رصيدك الحالي</span>
+            </a>
+
+            <!-- 2. Transfer Money -->
+            <!-- Using main code as transfer often requires interactive menu, or *7115*1# -->
+            <a href="tel:*7115*1%23" class="menu-item">
+                <div class="icon-wrapper">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <span class="title">تحويل أموال</span>
+                <span class="subtitle">لأي محفظة في مصر</span>
+            </a>
+
+            <!-- 3. Mobile & Internet Bills -->
+            <a href="tel:*7115*21%23" class="menu-item">
+                <div class="icon-wrapper">
+                    <i class="fas fa-mobile-screen-button"></i>
+                </div>
+                <span class="title">فواتير موبايل ونت</span>
+                <span class="subtitle">شحن وسداد الفواتير</span>
+            </a>
+
+            <!-- 4. Utility Payments -->
+            <a href="tel:*7115*23%23" class="menu-item">
+                <div class="icon-wrapper">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <span class="title">فواتير ومرافق</span>
+                <span class="subtitle">كهرباء، مياه، غاز</span>
+            </a>
+
+            <!-- 5. ATM Withdraw -->
+            <a href="tel:*7115*51%23" class="menu-item">
+                <div class="icon-wrapper">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <span class="title">سحب ATM</span>
+                <span class="subtitle">استلم الكاش من الماكينة</span>
+            </a>
+
+            <!-- 6. ATM Deposit -->
+            <a href="tel:*7115*525%23" class="menu-item">
+                <div class="icon-wrapper">
+                    <i class="fas fa-arrow-down"></i>
+                </div>
+                <span class="title">إيداع ATM</span>
+                <span class="subtitle">اشحن محفظتك نقدياً</span>
+            </a>
+
+            <!-- 7. Password Management (Full Width) -->
+            <a href="tel:*7115*11%23" class="menu-item full-width password-mgmt">
+                <div class="icon-wrapper">
+                    <i class="fas fa-key"></i>
+                </div>
+                <div class="text-content">
+                    <span class="title">إدارة الرقم السري</span>
+                    <span class="subtitle">تغيير (*11) أو نسيان الرقم السري (*10)</span>
+                </div>
+            </a>
+
+            <!-- 8. Fawry Codes -->
+            <a href="#" class="menu-item fawry-special full-width" onclick="openFawryModal(event)">
+                <div class="icon-wrapper"><i class="fas fa-cash-register"></i></div>
+                <div class="text-content">
+                    <span class="title">أكواد ماكينات فوري</span>
+                    <span class="subtitle">للتعامل مع التجار ومنافذ فوري</span>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="footer-note">
+            الكود الرئيسي للخدمة: <strong>#7115#</strong>
+        </div>
+    </div>
+
+    <!-- FAWRY CODES MODAL -->
+    <div id="fawryModal" class="modal">
+        <div class="modal-content">
+            <div class="fawry-header">
+                <div class="fawry-logo-circle"><i class="fas fa-star"></i></div>
+                <h3>أكواد الخدمة (فوري)</h3>
+            </div>
+            
+            <div class="codes-table-container">
+                <table class="codes-table">
+                    <thead>
+                        <tr>
+                            <th>الخدمة</th>
+                            <th>كود السحب</th>
+                            <th>كود الإيداع</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Highlight Orange Cash Row -->
+                        <tr class="row-highlight">
+                            <td><strong>أورنج كاش</strong></td>
+                            <td>357</td>
+                            <td>353</td>
+                        </tr>
+                        <tr>
+                            <td>فودافون كاش</td>
+                            <td>207</td>
+                            <td>204</td>
+                        </tr>
+                        <tr>
+                            <td>اتصالات كاش</td>
+                            <td>4432</td>
+                            <td>4430</td>
+                        </tr>
+                        <tr>
+                            <td>WE Pay</td>
+                            <td>44250</td>
+                            <td>44240</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="font-size:0.85em; color:#777; text-align:center; margin-bottom:15px;">
+                * يرجى إعطاء التاجر كود الخدمة لتنفيذ العملية على الماكينة.
+            </p>
+
+            <button class="btn-close" onclick="closeModal('fawryModal')">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        // --- Clock & Battery ---
+        function updateStatus() {
+            const now = new Date();
+            document.getElementById('current-time').innerText = now.toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
+        }
+        setInterval(updateStatus, 1000);
+        updateStatus();
+
+        if('getBattery' in navigator) navigator.getBattery().then(b => {
+            document.getElementById('battery-status').innerText = `%${Math.round(b.level * 100)}`;
+        });
+
+        // --- Modals Logic ---
+        function openFawryModal(e) {
+            e.preventDefault();
+            document.getElementById('fawryModal').style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
+
